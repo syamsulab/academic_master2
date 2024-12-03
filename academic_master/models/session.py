@@ -40,7 +40,10 @@ class AcademicSession(models.Model):
         string="State",
         selection=[("draft", "Draft"), ("open", "Open"), ("done", "Done")],
         required=True,
-        readonly=True,
+        default='draft',  # Menambahkan default state
+        states={
+            'done': [('readonly', True)],  # Contoh penggunaan states
+        }
     )
 
     def action_open(self):
